@@ -1218,6 +1218,11 @@ electron-next@^3.1.5:
     app-root-path ">=2.0.1"
     electron-is-dev ">=0.3.0"
 
+electron-positioner@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/electron-positioner/-/electron-positioner-4.1.0.tgz#e158f8f6aabd6725a8a9b4f2279b9504bcbea1b0"
+  integrity sha512-726DfbI9ZNoCg+Fcu6XLuTKTnzf+6nFqv7h+K/V6Ug7IbaPMI7s9S8URnGtWFCy5N5PL4HSzRFF2mXuinftDdg==
+
 electron-publish@22.10.5:
   version "22.10.5"
   resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-22.10.5.tgz#9cbe46266b6c79d8c6e99840755682e2262d3543"
@@ -2158,6 +2163,13 @@ md5.js@^1.3.4:
     hash-base "^3.0.0"
     inherits "^2.0.1"
     safe-buffer "^5.1.2"
+
+menubar@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/menubar/-/menubar-9.0.3.tgz#ba884a0ab0003d9b0f2a18bfda9da09b4d212eae"
+  integrity sha512-J5MVygpC5L9cCdZQuCSSdorSidKVqwHKabHcL+oavl2wScWL1jVWFYikxA03L1k3Q58QFF2szFXTceJpMshJSA==
+  dependencies:
+    electron-positioner "^4.1.0"
 
 merge-stream@^2.0.0:
   version "2.0.0"
