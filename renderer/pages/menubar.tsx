@@ -1,14 +1,14 @@
-import Link from "next/link";
+import { Provider } from "react-redux";
+import { Counter } from "../components/Counter";
 import Layout from "../components/Layout";
+import { store } from "../store/config";
 
 const AboutPage = () => (
-  <Layout title="About | Next.js + TypeScript + Electron Example">
-    <p>
-      <Link href="/">
-        <a>This is Menubar</a>
-      </Link>
-    </p>
-  </Layout>
+  <Provider store={store}>
+    <Layout title="About | Next.js + TypeScript + Electron Example">
+      <Counter />
+    </Layout>
+  </Provider>
 );
 
 export default AboutPage;

@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import Link from "next/link";
+import { Provider } from "react-redux";
+
 import Layout from "../components/Layout";
+import { store } from "../store/config";
+import { Counter } from "../components/Counter";
 
 const IndexPage = () => {
   useEffect(() => {
@@ -15,15 +19,18 @@ const IndexPage = () => {
   };
 
   return (
-    <Layout title="Home | Next.js + TypeScript + Electron Example">
-      <h1>Hello Next.js 👋</h1>
-      <button onClick={onSayHiClick}>Say hi to electron</button>
-      <p>
-        <Link href="/menubar">
-          <a>Menubar</a>
-        </Link>
-      </p>
-    </Layout>
+    <Provider store={store}>
+      <Layout title="Home | Next.js + TypeScript + Electron Example">
+        <h1>Hello Next.js 👋</h1>
+        <Counter />
+        <button onClick={onSayHiClick}>Say hi to electron</button>
+        <p>
+          <Link href="/menubar">
+            <a>Menubar</a>
+          </Link>
+        </p>
+      </Layout>
+    </Provider>
   );
 };
 
