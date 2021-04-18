@@ -31,19 +31,19 @@ app.on("ready", async () => {
 
   console.log(url);
 
-  const mb = menubar({
-    icon: join(app.getAppPath(), "assets", "icon.png"),
-    index: `${url}menubar`,
-    browserWindow: {
-      webPreferences: {
-        nodeIntegration: true,
-      },
-    },
-  });
+  // const mb = menubar({
+  //   icon: join(app.getAppPath(), "assets", "icon.png"),
+  //   index: `${url}menubar`,
+  //   browserWindow: {
+  //     webPreferences: {
+  //       nodeIntegration: true,
+  //     },
+  //   },
+  // });
 
-  mb.on("ready", () => {
-    console.log("App ready ✅");
-  });
+  // mb.on("ready", () => {
+  //   console.log("App ready ✅");
+  // });
 
   mainWindow.loadURL(url);
 });
