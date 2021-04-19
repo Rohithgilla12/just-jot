@@ -6,7 +6,9 @@ import { format } from "url";
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
-import { menubar } from "menubar";
+// import { menubar } from "menubar";
+
+app.setAsDefaultProtocolClient("justdown");
 
 // Prepare the renderer once the app is ready
 app.on("ready", async () => {
@@ -17,6 +19,7 @@ app.on("ready", async () => {
     height: 600,
     webPreferences: {
       nodeIntegration: false,
+      nativeWindowOpen: true,
       preload: join(__dirname, "preload.js"),
     },
   });
@@ -45,7 +48,7 @@ app.on("ready", async () => {
   //   console.log("App ready ✅");
   // });
 
-  mainWindow.loadURL(url);
+  mainWindow.loadURL(url), { userAgent: "Chrome" };
 });
 
 // Quit the app once all windows are closed
