@@ -1,19 +1,11 @@
-<p align="center"><img src="https://i.imgur.com/a9QWW0v.png"></p>
+# just-jot
+
+| Folder       | Target |
+| ---------- | ------------------------ |
+| desktop    | macOS, windows, Linux    |
+
 
 ## Usage
-
-### Create an App
-
-```
-# with npx
-$ npx create-nextron-app my-app --example with-typescript-tailwindcss
-
-# with yarn
-$ yarn create nextron-app my-app --example with-typescript-tailwindcss
-
-# with pnpx
-$ pnpx create-nextron-app my-app --example with-typescript-tailwindcss
-```
 
 ### Install Dependencies
 
