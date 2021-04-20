@@ -1,0 +1,12 @@
+appId: com.rohithgilla.justjot
+productName: Cross platform note taking application
+copyright: Copyright © 2020 Rohith Gilla
+directories:
+  output: dist
+  buildResources: resources
+files:
+  - from: .
+    filter:
+      - package.json
+      - app
+publish: null
