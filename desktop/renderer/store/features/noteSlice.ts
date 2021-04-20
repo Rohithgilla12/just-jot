@@ -10,7 +10,8 @@ interface Note {
   readonly text: string;
   readonly uid: string;
   readonly createdAt: Date;
-  readonly updatedAt: Date;
+  readonly updatedAt?: Date;
+  readonly folder?: string;
 }
 
 const initialState: NoteState = {
