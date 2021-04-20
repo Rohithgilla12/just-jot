@@ -6,9 +6,18 @@ import { format } from "url";
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
-// import { menubar } from "menubar";
+import { menubar } from "menubar";
+import Store from "electron-store";
 
 app.setAsDefaultProtocolClient("justdown");
+
+Store.initRenderer();
+
+const store = new Store();
+
+app.setLoginItemSettings({
+  openAtLogin: true,
+});
 
 // Prepare the renderer once the app is ready
 app.on("ready", async () => {
@@ -32,23 +41,26 @@ app.on("ready", async () => {
         slashes: true,
       });
 
-  console.log(url);
+  if (isDev) {
+    mainWindow.webContents.openDevTools({ mode: "detach" });
+  }
+  const mb = menubar({
+    icon: join(app.getAppPath(), "assets", "IconTemplate.png"),
+    index: `${url}menubar`,
+    browserWindow: {
+      webPreferences: {
+        nodeIntegration: true,
+      },
+    },
+  });
 
-  // const mb = menubar({
-  //   icon: join(app.getAppPath(), "assets", "icon.png"),
-  //   index: `${url}menubar`,
-  //   browserWindow: {
-  //     webPreferences: {
-  //       nodeIntegration: true,
-  //     },
-  //   },
-  // });
+  mainWindow.webContents.send("MSG_FROM_MAIN", "hello renderer");
 
-  // mb.on("ready", () => {
-  //   console.log("App ready ✅");
-  // });
+  mb.on("ready", () => {
+    console.log("App ready ✅");
+  });
 
-  mainWindow.loadURL(url), { userAgent: "Chrome" };
+  mainWindow.loadURL(url);
 });
 
 // Quit the app once all windows are closed
@@ -58,4 +70,10 @@ app.on("window-all-closed", app.quit);
 ipcMain.on("message", (event: IpcMainEvent, message: any) => {
   console.log(message);
   setTimeout(() => event.sender.send("message", "hi from electron"), 500);
+});
+
+ipcMain.on("MSG_FROM_RENDERER", (_event, data) => console.log(data));
+
+ipcMain.on("COUNTER_UPDATED", (_event, data) => {
+  store.set("counterValue", data);
 });

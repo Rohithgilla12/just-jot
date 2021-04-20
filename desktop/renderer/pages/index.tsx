@@ -12,10 +12,13 @@ const IndexPage = () => {
     global.ipcRenderer.addListener("message", (_event, args) => {
       alert(args);
     });
+
+    global.ipcRenderer.on("MSG_FROM_MAIN", (_event, data) => console.log(data));
   }, []);
 
   const onSayHiClick = () => {
     global.ipcRenderer.send("message", "hi from next");
+    global.ipcRenderer.send("MSG_FROM_RENDERER", "hello main");
   };
 
   return (
@@ -23,6 +26,7 @@ const IndexPage = () => {
       <Layout title="Home | Next.js + TypeScript + Electron Example">
         <h1>Hello Next.js 👋</h1>
         <Counter />
+
         <button onClick={onSayHiClick}>Say hi to electron</button>
         <p>
           <Link href="/menubar">

@@ -16,8 +16,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
+    "@supabase/supabase-js": "^1.11.6",
     "electron-is-dev": "^1.1.0",
     "electron-next": "^3.1.5",
+    "electron-store": "^7.0.3",
+    "firebase": "^8.4.1",
     "menubar": "^9.0.3",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
