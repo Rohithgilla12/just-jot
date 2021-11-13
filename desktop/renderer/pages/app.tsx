@@ -1,13 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Auth } from "@supabase/ui";
 import Head from "next/head";
 import { supabase } from "../utils/database";
+import { useDispatch, useSelector } from "react-redux";
+import { PrismaClient } from "@prisma/client";
 
-interface AppProps {}
+interface AppProps {
+  notes: any[];
+}
 
-const App: React.FC<AppProps> = ({}) => {
+export async function getServerSideProps() {
+  const db = new PrismaClient();
+
+  const notes = await db.note.findMany({});
+
+  console.log("ServerSideProps");
+  console.log(notes);
+
+  return {
+    props: {
+      notes,
+    },
+  };
+}
+
+const App: React.FC<AppProps> = ({ notes }) => {
   const { user } = Auth.useUser();
   const [note, setNote] = useState("");
+
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchNotes(user.id));
+  // }, []);
 
   const addTodo = async (noteText) => {
     let note = noteText.trim();
@@ -27,7 +52,11 @@ const App: React.FC<AppProps> = ({}) => {
         <title>Just Jot | App</title>
       </Head>
       <div className="flex flex-row">
-        <div className="w-1/3 h-full">Left bar</div>
+        <div className="w-1/3 h-full">
+          {notes.map((note) => (
+            <div key={note.id}>{note.title ?? note.note}</div>
+          ))}
+        </div>
         <div className="w-2/3 h-screen flex justify-center  flex-col">
           <textarea
             onChange={(event) => {

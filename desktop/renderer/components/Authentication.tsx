@@ -18,11 +18,11 @@ export const Authentication: React.FC<AuthenticationProps> = ({}) => {
   return (
     <div className="w-full h-screen bg-gray-300">
       {!user ? (
-        <div className="flex flex-row">
-          <div className="w-1/2 h-full flex justify-center items-center p-4">
+        <div className="flex flex-col">
+          <div className="w-full h-1/2 flex justify-center items-center p-4">
             <Auth supabaseClient={supabase} />
           </div>
-          <div className="w-1/2 h-full flex justify-center items-center p-4">
+          <div className="w-full h-1/2 flex justify-center items-center p-4">
             Eaisest simple way to take notes with cross platform support.
           </div>
         </div>
