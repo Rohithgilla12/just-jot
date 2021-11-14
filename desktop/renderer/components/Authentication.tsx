@@ -12,7 +12,7 @@ interface AuthenticationProps {}
 
 export const Authentication: React.FC<AuthenticationProps> = ({}) => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { user, session } = Auth.useUser();
 
   const { data, error } = useSWR(
@@ -91,7 +91,7 @@ export const Authentication: React.FC<AuthenticationProps> = ({}) => {
           <button
             className="btn-black w-full mt-12"
             onClick={async () => {
-              dispatch(logout());
+              // dispatch(logout());
             }}
           >
             Logout

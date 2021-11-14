@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { Tab } from "@headlessui/react";
 import { Auth } from "@supabase/ui";
 import Head from "next/head";
-import { supabase } from "../utils/database";
-import { useDispatch, useSelector } from "react-redux";
-import { PrismaClient } from "@prisma/client";
-import { fetchNotes, Note } from "../store/features/noteSlice";
 import { useRouter } from "next/router";
-import { Tab } from "@headlessui/react";
+import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import SyntaxHighlighter from "react-syntax-highlighter";
 import remarkGfm from "remark-gfm";
+import { Note } from "../store/features/noteSlice";
+import { supabase } from "../utils/database";
+import rehypeRaw from "rehype-raw";
 
 interface AppProps {
   notes: Note[];
@@ -59,7 +57,9 @@ export async function getServerSideProps({ req }) {
 
 const App: React.FC<AppProps> = ({ notes }) => {
   const { user } = Auth.useUser();
-  const [note, setNote] = useState("");
+  const [note, setNote] = useState(
+    "![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)"
+  );
   const router = useRouter();
 
   const addTodo = async (noteText) => {
@@ -138,7 +138,8 @@ const App: React.FC<AppProps> = ({ notes }) => {
               >
                 <ReactMarkdown
                   children={note}
-                  remarkPlugins={[remarkGfm]}                  
+                  rehypePlugins={[rehypeRaw]}
+                  remarkPlugins={[remarkGfm]}
                 />
               </Tab.Panel>
             </Tab.Panels>
