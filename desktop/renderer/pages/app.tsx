@@ -4,11 +4,19 @@ import Head from "next/head";
 import { supabase } from "../utils/database";
 import { useDispatch, useSelector } from "react-redux";
 import { PrismaClient } from "@prisma/client";
-import { fetchNotes } from "../store/features/noteSlice";
+import { fetchNotes, Note } from "../store/features/noteSlice";
 import { useRouter } from "next/router";
+import { Tab } from "@headlessui/react";
+import ReactMarkdown from "react-markdown";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import remarkGfm from "remark-gfm";
 
 interface AppProps {
-  notes: any[];
+  notes: Note[];
+}
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
 }
 
 export async function getServerSideProps({ req }) {
@@ -16,8 +24,6 @@ export async function getServerSideProps({ req }) {
 
   const { data: user, error: userError } =
     await supabase.auth.api.getUserByCookie(req);
-
-  console.log(user);
 
   if (userError) {
     // todo: handle the case when status is 401 and we need to refresh the session
@@ -35,12 +41,18 @@ export async function getServerSideProps({ req }) {
   const { data: notes, error: notesError } = await supabase
     .from("Note")
     .select("*")
-    .eq("user_id", user.id);
+    .eq("userId", user.id);
 
-  console.log("Notes", notes);
+  var noteArray: Note[] = [];
+
+  console.log(notes, notesError);
+  notes.forEach((note) => {
+    const currentNote = note as Note;
+    noteArray.push(currentNote);
+  });
   return {
     props: {
-      notes: notes === null ? [] : notes,
+      notes: notes === null ? [] : noteArray,
     },
   };
 }
@@ -50,25 +62,15 @@ const App: React.FC<AppProps> = ({ notes }) => {
   const [note, setNote] = useState("");
   const router = useRouter();
 
-  const dispatch = useDispatch();
-  // Do we need this?
-  // useEffect(() => {
-  //   if (user) {
-  //     dispatch(fetchNotes(user.id));
-  //   } else {
-  //     console.log(user);
-  //   }
-  // }, []);
-
   const addTodo = async (noteText) => {
     let note = noteText.trim();
     if (note.length) {
-      let { data: todo, error } = await supabase
+      let { data: todo, error: todoError } = await supabase
         .from("notes")
-        .insert({ note, user_id: user.id })
+        .insert({ content: note, userId: user.id })
         .single();
       console.log(todo);
-      console.log(error);
+      console.log(todoError);
     }
   };
 
@@ -78,29 +80,77 @@ const App: React.FC<AppProps> = ({ notes }) => {
         <title>Just Jot | App</title>
       </Head>
       <div className="flex flex-row">
-        <div className="w-1/3 h-full">
+        {/* <div className="w-full h-1/3">
           {notes.map((note) => (
-            <div key={note.id}>{note.title ?? note.note}</div>
+            <div key={note.id}>{note.title ?? note.content}</div>
           ))}
-        </div>
-        <div className="w-2/3 h-screen flex justify-center  flex-col">
-          <textarea
-            onChange={(event) => {
-              setNote(event.target.value);
-            }}
-            className="w-5/6 rounded-md bg-gray-300 h-4/5 p-2 my-8 mx-2"
-          ></textarea>
+        </div> */}
+        <div className="w-full h-2/3 flex justify-center  flex-col">
+          <Tab.Group>
+            <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    "w-full py-2.5 text-sm leading-5 font-medium text-green-100 rounded-lg",
+                    "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60",
+                    selected
+                      ? "bg-gray-700 shadow"
+                      : "text-blue-100 hover:bg-white/[0.12] hover:text-green-300"
+                  )
+                }
+              >
+                Content
+              </Tab>
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    "w-full py-2.5 text-sm leading-5 font-medium text-green-100 rounded-lg",
+                    "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60",
+                    selected
+                      ? "bg-gray-700 shadow"
+                      : "text-blue-100 hover:bg-white/[0.12] hover:text-green-300"
+                  )
+                }
+              >
+                Preview
+              </Tab>
+            </Tab.List>
+            <Tab.Panels className="mt-2">
+              <Tab.Panel
+                className={classNames(
+                  "bg-white rounded-xl p-3",
+                  "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"
+                )}
+              >
+                <textarea
+                  value={note}
+                  onChange={(event) => {
+                    setNote(event.target.value);
+                  }}
+                  className="w-full rounded-md h-80"
+                ></textarea>
+              </Tab.Panel>
+              <Tab.Panel
+                className={classNames(
+                  "bg-white rounded-xl p-3",
+                  "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"
+                )}
+              >
+                <ReactMarkdown
+                  children={note}
+                  remarkPlugins={[remarkGfm]}                  
+                />
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
+
           <button
-            onClick={
-              async () => {
-                //  await supabase.auth.signOut();
-                router.push("/");
-              }
-              // addTodo(note)
-            }
+            onClick={async () => {
+              await addTodo(note);
+            }}
             className="bg-blue-500 w-5/6 hover:bg-blue-400 text-white font-bold py-2  my-4 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
-            Logout
+            Save
           </button>
         </div>
       </div>

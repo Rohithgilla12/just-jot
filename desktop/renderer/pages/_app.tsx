@@ -1,5 +1,4 @@
 import React from "react";
-import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { Auth } from "@supabase/ui";
 
@@ -7,7 +6,7 @@ import "../styles/globals.css";
 import { store } from "../store/config";
 import { supabase } from "../utils/database";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: any) {
   return (
     <Provider store={store}>
       <Auth.UserContextProvider supabaseClient={supabase}>

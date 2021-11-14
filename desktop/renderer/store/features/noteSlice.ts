@@ -7,10 +7,10 @@ interface NoteState {
   readonly notes: Note[];
 }
 
-interface Note {
+export interface Note {
   readonly id: string;
-  readonly note: string;
-  readonly uid: string;
+  readonly content: string;
+  readonly userId: string;
   readonly createdAt: Date;
   readonly title?: string;
   readonly updatedAt?: Date;
