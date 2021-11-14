@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { supabase } from "../../utils/database";
+import { AppThunk, RootState } from "../config";
 
 interface NoteState {
   readonly loading: boolean;
@@ -7,9 +9,10 @@ interface NoteState {
 
 interface Note {
   readonly id: string;
-  readonly text: string;
+  readonly note: string;
   readonly uid: string;
   readonly createdAt: Date;
+  readonly title?: string;
   readonly updatedAt?: Date;
   readonly folder?: string;
 }
@@ -32,4 +35,26 @@ export const noteSlice = createSlice({
   },
 });
 
+export const fetchNotes =
+  (userId: string): AppThunk =>
+  async (dispatch, _getState) => {
+    const { data: notes, error } = await supabase
+      .from("Note")
+      .select("*")
+      .eq("user_id", userId);
+
+    var noteArray: Note[] = [];
+
+    notes.forEach((note) => {
+      const currentNote = note as Note;
+      noteArray.push(currentNote);
+    });
+
+    dispatch(setNotes(noteArray));
+  };
+
+export const userNotes = (state: RootState) => state.note.notes;
+
 export const { setNotes, setLoading } = noteSlice.actions;
+
+export default noteSlice.reducer;

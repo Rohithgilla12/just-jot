@@ -8,9 +8,11 @@ import {
 import logger from "redux-logger";
 
 import authReducer from "./features/authSlice";
+import noteReducer from "./features/noteSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  note: noteReducer,
 });
 
 export const store = configureStore({

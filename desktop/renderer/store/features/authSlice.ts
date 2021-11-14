@@ -8,11 +8,29 @@ interface AuthState {
   readonly user?: User;
 }
 
+// user {
+//   id: '47e4b390-3d09-4b28-8c61-6a06ba25b960',
+//   aud: 'authenticated',
+//   role: 'authenticated',
+//   email: 'sherlock@grr.la',
+//   email_confirmed_at: '2021-11-13T20:56:33.871504Z',
+//   phone: '',
+//   confirmed_at: '2021-11-13T20:56:33.871504Z',
+//   last_sign_in_at: '2021-11-14T12:37:33.662448Z',
+//   app_metadata: { provider: 'email', providers: [ 'email' ] },
+//   user_metadata: {},
+//   identities: [],
+//   created_at: '2021-11-13T20:56:33.865824Z',
+//   updated_at: '2021-11-13T20:56:33.865824Z'
+// }
+
 interface User {
-  readonly displayName: string;
+  readonly id: string;
   readonly email: string;
-  readonly uid: string;
+  readonly name?: string;
   readonly photoURL?: string;
+  readonly createdAt?: Date;
+  readonly updatedAt?: Date;
 }
 
 const initialState: AuthState = {

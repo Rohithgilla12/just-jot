@@ -23,6 +23,7 @@ specifiers:
   react-dom: ^17.0.2
   react-redux: ^7.2.3
   redux-logger: ^3.0.6
+  swr: ^1.0.1
   tailwindcss: ^2.0.2
   typescript: ^4.2.3
 
@@ -37,6 +38,7 @@ dependencies:
   menubar: 9.1.0_electron@12.2.2
   react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
   redux-logger: 3.0.6
+  swr: 1.0.1_react@17.0.2
 
 devDependencies:
   '@types/node': 14.17.33
@@ -3064,6 +3066,11 @@ packages:
     resolution: {integrity: sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=}
     engines: {node: '>= 0.6'}
     dev: true
+
+  /dequal/2.0.2:
+    resolution: {integrity: sha512-q9K8BlJVxK7hQYqa6XISGmBZbtQQWVXSrRrWreHC94rMt1QL/Impruc+7p2CYSYuVIUr+YCt6hjrs1kkdJRTug==}
+    engines: {node: '>=6'}
+    dev: false
 
   /des.js/1.0.1:
     resolution: {integrity: sha512-Q0I4pfFrv2VPd34/vfLrFOoRmlYj3OV50i7fskps1jZWK1kApMWWT9G6RRUeYedLcBDIhnSDaUvJMb3AhUlaEA==}
@@ -6549,6 +6556,15 @@ packages:
     dependencies:
       has-flag: 4.0.0
     dev: true
+
+  /swr/1.0.1_react@17.0.2:
+    resolution: {integrity: sha512-EPQAxSjoD4IaM49rpRHK0q+/NzcwoT8c0/Ylu/u3/6mFj/CWnQVjNJ0MV2Iuw/U+EJSd2TX5czdAwKPYZIG0YA==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0
+    dependencies:
+      dequal: 2.0.2
+      react: 17.0.2
+    dev: false
 
   /tailwindcss/2.2.19_0c54bdadaf9d9c9c6c134cb2c6c061a3:
     resolution: {integrity: sha512-6Ui7JSVtXadtTUo2NtkBBacobzWiQYVjYW0ZnKaP9S1ZCKQ0w7KVNz+YSDI/j7O7KCMHbOkz94ZMQhbT9pOqjw==}

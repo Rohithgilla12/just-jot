@@ -20,7 +20,8 @@
     "electron-store": "^7.0.2",
     "menubar": "^9.1.0",
     "react-redux": "^7.2.3",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.20",
