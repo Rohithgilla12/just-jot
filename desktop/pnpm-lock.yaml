@@ -7,6 +7,7 @@ specifiers:
   '@supabase/supabase-js': ^1.11.6
   '@supabase/ui': ^0.24.0
   '@tailwindcss/forms': ^0.3.2
+  '@tailwindcss/typography': ^0.4.1
   '@types/node': ^14.14.20
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
@@ -42,6 +43,7 @@ dependencies:
   '@supabase/supabase-js': 1.27.0
   '@supabase/ui': 0.24.3_react-dom@17.0.2+react@17.0.2
   '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
+  '@tailwindcss/typography': 0.4.1_tailwindcss@2.2.19
   electron-serve: 1.1.0
   electron-store: 7.0.3
   markdown-to-jsx: 7.1.3_react@17.0.2
@@ -1588,6 +1590,18 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
+      tailwindcss: 2.2.19_0c54bdadaf9d9c9c6c134cb2c6c061a3
+    dev: false
+
+  /@tailwindcss/typography/0.4.1_tailwindcss@2.2.19:
+    resolution: {integrity: sha512-ovPPLUhs7zAIJfr0y1dbGlyCuPhpuv/jpBoFgqAc658DWGGrOBWBMpAWLw2KlzbNeVk4YBJMzue1ekvIbdw6XA==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      lodash.uniq: 4.5.0
       tailwindcss: 2.2.19_0c54bdadaf9d9c9c6c134cb2c6c061a3
     dev: false
 
@@ -4503,9 +4517,21 @@ packages:
       p-locate: 4.1.0
     dev: true
 
+  /lodash.castarray/4.4.0:
+    resolution: {integrity: sha1-wCUTUV4wna3dTCTGDP3c9ZdtkRU=}
+    dev: false
+
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
     dev: true
+
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=}
+    dev: false
+
+  /lodash.merge/4.6.2:
+    resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
+    dev: false
 
   /lodash.sortby/4.7.0:
     resolution: {integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=}
@@ -4514,6 +4540,10 @@ packages:
   /lodash.topath/4.5.2:
     resolution: {integrity: sha1-NhY1Hzu6YZlKCTGYlmC9AyVP0Ak=}
     dev: true
+
+  /lodash.uniq/4.5.0:
+    resolution: {integrity: sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=}
+    dev: false
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}

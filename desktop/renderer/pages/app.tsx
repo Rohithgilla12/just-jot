@@ -1,13 +1,12 @@
 import { Tab } from "@headlessui/react";
 import { Auth } from "@supabase/ui";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { Note } from "../store/features/noteSlice";
 import { supabase } from "../utils/database";
-import rehypeRaw from "rehype-raw";
 
 interface AppProps {
   notes: Note[];
@@ -60,7 +59,6 @@ const App: React.FC<AppProps> = ({ notes }) => {
   const [note, setNote] = useState(
     "![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)"
   );
-  const router = useRouter();
 
   const addTodo = async (noteText) => {
     let note = noteText.trim();
@@ -136,11 +134,13 @@ const App: React.FC<AppProps> = ({ notes }) => {
                   "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"
                 )}
               >
-                <ReactMarkdown
-                  children={note}
-                  rehypePlugins={[rehypeRaw]}
-                  remarkPlugins={[remarkGfm]}
-                />
+                <article className="prose lg:prose-xl">
+                  <ReactMarkdown
+                    children={note}
+                    rehypePlugins={[rehypeRaw]}
+                    remarkPlugins={[remarkGfm]}
+                  />
+                </article>
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
