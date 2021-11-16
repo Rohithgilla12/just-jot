@@ -7,6 +7,7 @@ specifiers:
   '@supabase/supabase-js': ^1.11.6
   '@supabase/ui': ^0.24.0
   '@tailwindcss/forms': ^0.3.2
+  '@tailwindcss/line-clamp': ^0.2.2
   '@tailwindcss/typography': ^0.4.1
   '@types/node': ^14.14.20
   '@types/react': ^17.0.0
@@ -43,6 +44,7 @@ dependencies:
   '@supabase/supabase-js': 1.27.0
   '@supabase/ui': 0.24.3_react-dom@17.0.2+react@17.0.2
   '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
+  '@tailwindcss/line-clamp': 0.2.2_tailwindcss@2.2.19
   '@tailwindcss/typography': 0.4.1_tailwindcss@2.2.19
   electron-serve: 1.1.0
   electron-store: 7.0.3
@@ -1590,6 +1592,14 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
+      tailwindcss: 2.2.19_0c54bdadaf9d9c9c6c134cb2c6c061a3
+    dev: false
+
+  /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
+    resolution: {integrity: sha512-NgA4Ds+/eCiO+6O3SooRsfJ8m7M2+QvNvHwOjBQq7FIYoWwAV4I4Wu4fjHeuO9Yi6p47ceHUKEGGEBh0ozQodg==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
+    dependencies:
       tailwindcss: 2.2.19_0c54bdadaf9d9c9c6c134cb2c6c061a3
     dev: false
 

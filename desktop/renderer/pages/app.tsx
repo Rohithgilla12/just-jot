@@ -64,7 +64,7 @@ const App: React.FC<AppProps> = ({ notes }) => {
     let note = noteText.trim();
     if (note.length) {
       let { data: todo, error: todoError } = await supabase
-        .from("notes")
+        .from("Note")
         .insert({ content: note, userId: user.id })
         .single();
       console.log(todo);
@@ -93,7 +93,7 @@ const App: React.FC<AppProps> = ({ notes }) => {
                     "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60",
                     selected
                       ? "bg-gray-700 shadow"
-                      : "text-blue-100 hover:bg-white/[0.12] hover:text-green-300"
+                      : "text-blue-500 hover:bg-white/[0.12] hover:text-green-300"
                   )
                 }
               >
@@ -106,7 +106,7 @@ const App: React.FC<AppProps> = ({ notes }) => {
                     "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60",
                     selected
                       ? "bg-gray-700 shadow"
-                      : "text-blue-100 hover:bg-white/[0.12] hover:text-green-300"
+                      : "text-blue-500 hover:bg-white/[0.12] hover:text-green-300"
                   )
                 }
               >
@@ -149,7 +149,7 @@ const App: React.FC<AppProps> = ({ notes }) => {
             onClick={async () => {
               await addTodo(note);
             }}
-            className="bg-blue-500 w-5/6 hover:bg-blue-400 text-white font-bold py-2  my-4 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            className="bg-blue-500 wfull hover:bg-blue-400 text-white font-bold py-2  my-4 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
             Save
           </button>
